@@ -1,5 +1,12 @@
 <?php
 
+// Bing: Image of the Day
+// v0.01 (Release: biotd-000)
+// (C) Csikvári Mátyás alias V-kond 2025.
+// Terms and conditions of the GNU GPL-3.0 licence apply.
+
+
+
 $error = 0;
 
 
