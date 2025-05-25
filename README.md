@@ -7,9 +7,11 @@ Introduction
 Options include to specify
 - region of origin  and
 - desired resolution
+
 for the image, and also to choose to
 - display (in the browser) or
 - simply output (in a PHP array)
+
 the information for further use.
 
 Usage
