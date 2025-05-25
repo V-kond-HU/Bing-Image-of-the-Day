@@ -66,6 +66,7 @@ Appendix B: PHP array output detailes
 -------------------------------------
 If selected, the script will only save it's results in the backbround into a PHP array as variable '$RESULT'.
 Array keys and contents are:
+
 $RESULT = array (
    0 => 'image URL as text string',
    1 => 'image title as text string',
