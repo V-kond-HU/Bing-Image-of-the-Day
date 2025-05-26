@@ -1,7 +1,7 @@
 <?php
 
 // Bing: Image of the Day
-// v0.01 (Release: biotd-000)
+// v0.03 (Non-Release)
 // (C) Csikvári Mátyás alias V-kond 2025.
 // Terms and conditions of the GNU GPL-3.0 licence apply.
 
@@ -13,17 +13,27 @@ $error = 0;
 
 // PARAMETERS
 // > Locale
-$param_locale = 'auto'; // DEFAULT
-if (isset ($_GET['loc'])) {
+if (isset ($param_locale)) {
+	$param_locale = $param_locale;
+}
+elseif (isset ($_GET['loc'])) {
 	$param_locale = $_GET['loc'];
 }
+else {
+	$param_locale = 'auto'; // DEFAULT
+}
 // > Resolution
-$param_resolution = '1920x1200'; // DEFAULT
-if (isset ($_GET['res'])) {
+if (isset ($param_resolution)) {
+	$param_resolution = $param_resolution;
+}
+elseif ($_GET['res']) {
 	$param_resolution = $_GET['res'];
 	if ($param_resolution === 'auto') {
-		$param_resolution = '1920x1200';
+		$param_resolution = '1920x1200'; // DEFAULT
 	}
+}
+else {
+	$param_resolution = '1920x1200'; // DEFAULT
 }
 // > Output method
 $param_output = 0; // DEFAULT
