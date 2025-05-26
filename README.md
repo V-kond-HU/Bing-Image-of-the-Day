@@ -23,6 +23,7 @@ Usage
 2. Specify parameters for the script.
 
    2.1 If using the script embedded (like via 'include'), parameters may be predefined as variables before inserting and executing the script.
+
        Any parameters not predefined will automatically be set to default values on execution.
 
    2.2 If running the script as a standalone by opening index.php in a web browser, you may define parameters by adding them to the URL
