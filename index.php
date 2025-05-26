@@ -14,7 +14,6 @@ $error = 0;
 // PARAMETERS
 // > Locale
 if (isset ($param_locale)) {
-	$param_locale = $param_locale;
 }
 elseif (isset ($_GET['loc'])) {
 	$param_locale = $_GET['loc'];
@@ -24,7 +23,9 @@ else {
 }
 // > Resolution
 if (isset ($param_resolution)) {
-	$param_resolution = $param_resolution;
+	if ($param_resolution === 'auto') {
+		$param_resolution = '1920x1200'; // DEFAULT
+	}
 }
 elseif ($_GET['res']) {
 	$param_resolution = $_GET['res'];
@@ -36,9 +37,13 @@ else {
 	$param_resolution = '1920x1200'; // DEFAULT
 }
 // > Output method
-$param_output = 0; // DEFAULT
-if (isset ($_GET['out'])) {
+if (isset ($param_output)) {
+}
+elseif (isset ($_GET['out'])) {
 	$param_output = $_GET['out'];
+}
+else {
+	$param_output = 0; // DEFAULT
 }
 
 
@@ -125,7 +130,7 @@ switch ($error) {
 	case 3:
 		
 		if ($param_output == 0) {
-			echo '<p>ERROR (1): JSON data file corrupted.</p>';
+			echo '<p>ERROR (3): JSON data file corrupted.</p>';
 		}
 		
 		break;
