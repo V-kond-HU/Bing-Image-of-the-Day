@@ -13,37 +13,73 @@ $error = 0;
 
 // PARAMETERS
 // > Locale
-if (isset ($param_locale)) {
-}
-elseif (isset ($_GET['loc'])) {
+if (isset ($_GET['loc'])) {
 	$param_locale = $_GET['loc'];
 }
-else {
+if (!isset ($_GET['loc']) && isset ($param_locale)) {
+	$param_locale = $param_locale;
+}
+if (!isset ($param_locale) && !isset ($_GET['loc'])) {
 	$param_locale = 'auto'; // DEFAULT
 }
 // > Resolution
-if (isset ($param_resolution)) {
-	if ($param_resolution === 'auto') {
-		$param_resolution = '1920x1200'; // DEFAULT
-	}
-}
-elseif ($_GET['res']) {
+if (isset ($_GET['res'])) {
 	$param_resolution = $_GET['res'];
 	if ($param_resolution === 'auto') {
 		$param_resolution = '1920x1200'; // DEFAULT
 	}
 }
-else {
+if (!isset ($_GET['res']) && isset ($param_resolution)) {
+	if ($param_resolution === 'auto') {
+		$param_resolution = '1920x1200'; // DEFAULT
+	}
+}
+if (!isset ($_GET['res']) && !isset ($param_resolution)) {
 	$param_resolution = '1920x1200'; // DEFAULT
 }
 // > Output method
-if (isset ($param_output)) {
-}
-elseif (isset ($_GET['out'])) {
+if (isset ($_GET['out'])) {
 	$param_output = $_GET['out'];
 }
-else {
+if (!isset ($_GET['out']) && isset ($param_output)) {
+	$param_output = $param_output;
+}
+if (!isset ($_GET['out']) && !isset ($param_output)) {
 	$param_output = 0; // DEFAULT
+}
+
+
+
+// VALIDATE PARAMETERS
+$valid_locales = array ('auto', 'de_DE', 'en_AU', 'en_CA', 'en_GB', 'en_IN', 'en_US', 'fr_CA', 'fr_FR', 'ja_JP', 'zh_CN');
+foreach ($valid_locales as $valid_locale) {
+	if ($valid_locale === $param_locale) {
+		$error = 0;
+		break;
+	}
+	else {
+		$error = 41;
+	}
+}
+$valid_resolutions = array ('auto', '800x600', '1024x768', '1280x720', '1280x768', '1366x768', '1920x1080', '1920x1200', '720x1280', '768x1024', '768x1280', '768x13661', '1080x1920');
+foreach ($valid_resolutions as $valid_resolution) {
+	if ($valid_resolution === $param_resolution) {
+		$error = 0;
+		break;
+	}
+	else {
+		$error = 42;
+	}
+}
+$valid_outputs = array (0, 1);
+foreach ($valid_outputs as $valid_output) {
+	if ($valid_output == $param_output) {
+		$error = 0;
+		break;
+	}
+	else {
+		$error = 43;
+	}
 }
 
 
@@ -135,7 +171,32 @@ switch ($error) {
 		
 		break;
 	
+	case 41:
+		
+		if ($param_output == 0) {
+			echo "<p>ERROR (41): User-defined parameter for locale ('loc') is non-valid.</p>";
+		}
+		
+		break;
+	
+	case 42:
+		
+		if ($param_output == 0) {
+			echo "<p>ERROR (42): User-defined parameter for resolution ('res') is non-valid.</p>";
+		}
+		
+		break;
+	
+	case 43:
+		
+		if ($param_output < 0 || $param_output > 1) {
+			echo "<p>ERROR (43): User-defined parameter for output method ('out') is non-valid.</p>";
+		}
+		
+		break;
+	
 }
+
 // END SCRIPT //
 
 ?>
